@@ -1,12 +1,16 @@
 //Paste In 'preload'
 function preload() {
 
-game.load.baseURL = 'http://examples.phaser.io/assets/';
-game.load.crossOrigin = 'anonymous';
+    game.load.baseURL = 'http://examples.phaser.io/assets/';
+    game.load.crossOrigin = 'anonymous';
+        
+    game.load.image('stars', 'http://images.nationalgeographic.com/wpf/media-live/photos/000/012/cache/stars_1230_600x450.jpg');
     
-game.load.image('stars', 'http://images.nationalgeographic.com/wpf/media-live/photos/000/012/cache/stars_1230_600x450.jpg');
-
-game.load.spritesheet('ship', 'sprites/pacman_by_oz_28x28.png', 28, 28);
+    game.load.spritesheet('ship', 'sprites/pacman_by_oz_28x28.png', 28, 28);
+    
+    game.load.image('bullet', 'sprites/bullet.png');
+    
+    game.load.image('monster', 'sprites/shinybell');
 
 }
 
@@ -17,6 +21,12 @@ game.load.spritesheet('ship', 'sprites/pacman_by_oz_28x28.png', 28, 28);
 //Paste In 'create' 
 var starfield;
 var ship;
+var bullets;
+var nextFire = 0;
+var fireRate = 50;
+
+var monsters;
+var numberOfMonsters =0;
 
 function create() {
     
@@ -37,6 +47,24 @@ game.physics.enable(ship, Phaser.Physics.ARCADE);
 game.camera.follow(ship);
 ship.body.collideWorldBounds = true;
 
+bullets = game.add.group();
+bullets.enableBody = true;
+bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+bullets.createMultiple(50, 'bullet');
+bullets.setAll('checkWorldBounds', true);
+bullets.setAll('outOfBoundsKill', true);
+
+monsters = game.add.group();
+monsters.enableBody = true;
+monsters.phisicsBodyType = Phaser.Physics.ARCADE;
+
+createMonsters();
+
+function createMonsters(){
+    
+}
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +75,23 @@ ship.body.collideWorldBounds = true;
 function update(){
 
 shipControls();
+shipFireControls();
+
+function fire(){
+    if(game.time.now > nextFire && bullets.countDead() > 0){
+        nextFire = game.time.now + fireRate;
+        var bullet = bullets.getFirstDead();
+        bullet.reset(ship.x + 30, ship.y + 30);
+        game.physics.arcade.moveToPointer(bullet, 600);
+    }
+}
+
+function shipFireControls(){
+    game.physics.arcade.angleToPointer(ship);
+    if(game.input.activePointer.isDown){
+        fire();
+    }
+}
 
 function shipControls(){    
     var wasdControls = {
