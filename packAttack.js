@@ -11,9 +11,9 @@ function preload() {
     
     game.load.image('bullet', 'sprites/tomato.png');
     
-    game.load.image('monster', 'https://lh3.googleusercontent.com/-RDc-rrc1Ta8/AAAAAAAAAAI/AAAAAAAAAJc/LF8uBEcQkLU/s46-c-k-no/photo.jpg');
+    game.load.image('monster', 'http://www.irancraft.ir/forum/image.php?u=356&dateline=1426403920');
     
-    game.load.spritesheet('heart', 'http://megaicons.net/static/img/icons_sizes/333/864/32/pac-man-icon.png', 28, 28);
+    game.load.spritesheet('heart', 'http://static.wixstatic.com/media/e533de_8e4782461f5e498ea58e4dcd6b684ae6.png/v1/fill/w_33,h_34,al_c,usm_0.66_1.00_0.01/e533de_8e4782461f5e498ea58e4dcd6b684ae6.png', 28, 28);
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,8 +36,8 @@ var nextFire = 0;
 var fireRate = 100;
 
 var monsters;
-var numberOfMonsters = 100;
-var monsterSpeed = 50;
+var numberOfMonsters = 1000;
+var monsterSpeed = 40;
 
 var tolerance = 200;
 
@@ -88,8 +88,8 @@ function create() {
     createMonsters();
     
     //HUD
-    hud = game.add.sprite(0, 540, 'hud');
-    hud2 = game.add.sprite(512, 540, 'hud')
+    hud = game.add.sprite(0, 550, 'hud');
+    hud2 = game.add.sprite(512, 550, 'hud')
     
     //make hearts
     hearts = game.add.group();
@@ -102,9 +102,9 @@ function create() {
     createLives();
     
     //gameover u noob
-   gameOverText = game.add.text()
+   //gameOverText = game.add.text()
 
-function start(){
+/*function start(){
     
     game.time.reset();
     
@@ -114,7 +114,7 @@ function start(){
     createMonsters();
     ship.revive();
     gameOverText.visible = false;
-}
+}*/
 
 function createLives(){
     for(var i = 0; i < numberOfLives; i++)
@@ -138,6 +138,7 @@ function createMonsters(){
         var monster = monsters.create(randx, randy, 'monster');
     }
     
+}
 }
 
 
