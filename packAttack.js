@@ -11,11 +11,12 @@ function preload() {
     
     game.load.image('bullet', 'sprites/tomato.png');
     
-    game.load.image('monster', 'http://www.irancraft.ir/forum/image.php?u=356&dateline=1426403920');
+    game.load.image('monster', 'https://lh3.googleusercontent.com/-fKgndpx4nvY/AAAAAAAAAAI/AAAAAAAAAAA/XauKT0H42RQ/s46-c-k-no/photo.jpg');
     
-    game.load.spritesheet('heart', 'http://static.wixstatic.com/media/e533de_8e4782461f5e498ea58e4dcd6b684ae6.png/v1/fill/w_33,h_34,al_c,usm_0.66_1.00_0.01/e533de_8e4782461f5e498ea58e4dcd6b684ae6.png', 28, 28);
+    game.load.image('heart', 'http://cdn.iconsmash.com/Content/icons/game-stars-win/iconpreviews/16/Pacman.png');
 
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,8 +37,9 @@ var nextFire = 0;
 var fireRate = 100;
 
 var monsters;
-var numberOfMonsters = 1000;
-var monsterSpeed = 40;
+var numberOfMonsters = 10;
+var monsterSpeed = 50;
+var wave = 0;
 
 var tolerance = 200;
 
@@ -53,7 +55,7 @@ function create() {
     game.physics.p2.defaultRestitution = 0.9;
     
     //set background
-    starfield = game.add.tileSprite(0, 0, 800, 600, "stars");
+    starfield = game.add.tileSprite(0, 0, 800, 600, 'stars');
     starfield.fixedToCamera = true;
     
     //make ship
@@ -89,7 +91,7 @@ function create() {
     
     //HUD
     hud = game.add.sprite(0, 550, 'hud');
-    hud2 = game.add.sprite(512, 550, 'hud')
+    hud2 = game.add.sprite(512, 550, 'hud');
     
     //make hearts
     hearts = game.add.group();
@@ -101,10 +103,9 @@ function create() {
     lifeText.fixedToCamera = true;
     createLives();
     
-    //gameover u noob
-   //gameOverText = game.add.text()
+}
 
-/*function start(){
+function start(){
     
     game.time.reset();
     
@@ -114,11 +115,11 @@ function create() {
     createMonsters();
     ship.revive();
     gameOverText.visible = false;
-}*/
+}
 
 function createLives(){
     for(var i = 0; i < numberOfLives; i++)
-        var heart = hearts.create(250 - (30 * i), 560, 'heart')
+        var heart = hearts.create(250 - (30 * i), 560, 'heart');
 }
 
 function createMonsters(){
@@ -139,8 +140,6 @@ function createMonsters(){
     }
     
 }
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +171,7 @@ function dIE(bullet, monster){
         
     bullet.kill();
     monster.kill();
-        
+        console.log(numberOfMonsters);
     }
     
 function youDIE(you, monster){
