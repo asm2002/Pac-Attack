@@ -13,4 +13,4 @@ Make sure you have http://phaser.io/sandbox/edit/1 open!
 
 4: Go Back To The Whole Folder And Repeat The Steps With "create" & "update"
 
-WARNING : STILL IN DEVELOPEMENT
+WARNING : STILL IN DEVELOPMENT
