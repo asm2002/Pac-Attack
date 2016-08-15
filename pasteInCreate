@@ -1,8 +1,14 @@
+//Paste In 'create' 
+
+
 //variables
 var starfield;
 
 var hud;
 var hud2;
+
+var gameOverText;
+var gameOverText2;
 
 var ship;
 
@@ -31,6 +37,16 @@ function create() {
     //set background
     starfield = game.add.tileSprite(0, 0, 800, 600, 'stars');
     starfield.fixedToCamera = true;
+    
+    //gameover text
+    gameOverText = game.add.text(200, 200, ' ', {
+        font: '48px Arial', 
+        fill: '#fff' });
+     gameOverText2 = game.add.text(200, 400, '', {
+        font: '32px Arial',
+        fill: '#fff'});
+    gameOverText.visible = false;
+    gameOverText.fixedToCamera = true;
     
     //make ship
     ship = game.add.sprite(400, 300, 'ship');
@@ -77,19 +93,32 @@ function create() {
     lifeText.fixedToCamera = true;
     createLives();
     
+        start();
+    
 }
 
 function start(){
-    
+
+    points = 0;
     game.time.reset();
     
+    numberOfMonsters = 1000;
+    
     hearts.callAll('revive');
-    monsters.removeAll;
+    
+    monsters.removeAll();
+    numberOfMonsters = 1000;
+    monsterSpeed = 50;
     
     createMonsters();
     ship.revive();
+    randomizeObjectLocation(coin);
+    randomizeObjectLocation(weaponBox);
+
     gameOverText.visible = false;
+    highScoreText.visible = false;
 }
+
 
 function createLives(){
     for(var i = 0; i < numberOfLives; i++)
