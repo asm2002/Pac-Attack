@@ -1,1 +1,94 @@
+function update() {
+ 
+     movementControls();
+   
+    shipFireControls();
+    
+    collisionDetection();
+    
+    monsterMovement();
+}
 
+function monsterMovement(){
+    monsters.forEach(
+        function (singleMonster){
+            game.physics.arcade.moveToObject(singleMonster, ship, monsterSpeed);
+        },    
+        game.physics
+        
+    );
+}
+
+function dIE(bullet, monster){
+        
+    bullet.kill();
+    monster.kill();
+        console.log(numberOfMonsters);
+    }
+    
+function youDIE(you, monster){
+    
+    monster.kill();
+    
+    var heart = hearts.getFirstAlive();
+    
+    if(heart){
+        heart.kill();
+    }
+    if(hearts.countLiving() < 1){
+        you.kill();
+    }
+}
+    
+function collisionDetection(){
+        
+    game.physics.arcade.overlap(bullets, monsters, dIE, null, this);
+    
+    game.physics.arcade.overlap(ship, monsters, youDIE, null, this);
+}
+    
+function fire() {
+    if (game.time.now > nextFire && bullets.countDead() > 0){
+        nextFire = game.time.now + fireRate;
+        var bullet = bullets.getFirstDead();
+        bullet.reset(ship.x + 25, ship.y + 25);
+        game.physics.arcade.moveToPointer(bullet, 600);
+    }
+}
+
+function movementControls(){
+    
+    wasdControls = {
+        up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+        down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+        left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+        right: game.input.keyboard.addKey(Phaser.Keyboard.D)
+    };
+    
+    ship.body.velocity.setTo(0, 0);
+
+    if (wasdControls.left.isDown){
+		ship.body.velocity.x = -400;
+		
+    }
+    else if (wasdControls.right.isDown){
+		ship.body.velocity.x = 400;
+    }
+
+    if (wasdControls.up.isDown){
+    	ship.body.velocity.y = -400;
+    }
+    else if (wasdControls.down.isDown){
+        ship.body.velocity.y = 400;
+    }
+    
+}
+
+function shipFireControls(){
+    game.physics.arcade.angleToPointer(ship);
+    
+    if (game.input.activePointer.isDown){
+        fire();
+    }
+
+}
