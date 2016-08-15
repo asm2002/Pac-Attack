@@ -1,3 +1,4 @@
+//Paste In 'update'
 function update() {
  
      movementControls();
@@ -37,6 +38,11 @@ function youDIE(you, monster){
     }
     if(hearts.countLiving() < 1){
         you.kill();
+        gameOverText.text="Game Over U Noob!!!";
+        gameOverText2.text = "(click to restart)";
+        gameOverText.visible = true;
+        monsters.removeAll();
+
     }
 }
     
