@@ -1,1 +1,17 @@
+function preload() {
 
+    game.load.baseURL = 'http://examples.phaser.io/assets/';
+    game.load.crossOrigin = 'anonymous';
+        
+    game.load.image('stars', 'http://images.nationalgeographic.com/wpf/media-live/photos/000/012/cache/stars_1230_600x450.jpg');
+    game.load.image('hud', 'textures/metal.png');
+    
+    game.load.spritesheet('ship', 'sprites/pacman_by_oz_28x28.png', 28, 28);
+    
+    game.load.image('bullet', 'sprites/tomato.png');
+    
+    game.load.image('monster', 'https://lh3.googleusercontent.com/-fKgndpx4nvY/AAAAAAAAAAI/AAAAAAAAAAA/XauKT0H42RQ/s46-c-k-no/photo.jpg');
+    
+    game.load.image('heart', 'http://cdn.iconsmash.com/Content/icons/game-stars-win/iconpreviews/16/Pacman.png');
+
+}
