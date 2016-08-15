@@ -12,6 +12,6 @@ function preload() {
     
     game.load.image('monster', 'https://lh3.googleusercontent.com/-fKgndpx4nvY/AAAAAAAAAAI/AAAAAAAAAAA/XauKT0H42RQ/s46-c-k-no/photo.jpg');
     
-    game.load.image('heart', 'http://cdn.iconsmash.com/Content/icons/game-stars-win/iconpreviews/16/Pacman.png');
+    game.load.image('heart', 'sprites/blue_ball.png');
 
 }
